@@ -27,6 +27,6 @@ Pod::Spec.new do |s|
                            'GCC_PREPROCESSOR_DEFINITIONS' => 'PJ_AUTOCONF=1'}
 
   s.frameworks          = 'CFNetwork', 'AudioToolbox', 'AVFoundation', 'CoreMedia', 'SystemConfiguration'
-  s.libraries           = 'stdc++'
+  s.libraries           = 'stdc++', 'resolv.9'
   s.requires_arc        = false
 end

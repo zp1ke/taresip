@@ -18,7 +18,8 @@ pod 'taresip'
 
 1. Download project and run [build.sh](build.sh) script.
 2. Drag generated libraries and headers files into your XCode project.
-3. Check your XCode project have the following frameworks: CFNetwork, AudioToolbox, AVFoundation and CoreMedia.
+3. Check your XCode project has the following frameworks: `CFNetwork`, `AudioToolbox`, `AVFoundation`, `SystemConfiguration` and `CoreMedia`.
+4. Check your XCode project has the follwing libraries: `libstdc++.tbd` and `libresolv.9.tbd`.
 
 ## Usage
 
@@ -36,9 +37,9 @@ Import headers on your `-Bridging_Header.h`.
 #### Sample call
 
 ```swift
-    var error = libre_init()
-    guard error == 0
-    else {
-        //TODO: Could not init `libre`. Handle error value and redirect flow.
-    }
+var error = libre_init()
+if error != 0
+{
+    //TODO: Could not init `libre`. Handle error value and redirect flow.
+}
 ```
