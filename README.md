@@ -28,14 +28,14 @@ Please also refer to [baresip docs](http://creytiv.com/doxygen/baresip-dox/html)
 
 Import headers on your `-Bridging_Header.h`.
 
-```
+```c
 #import <re.h>
 #import <baresip.h>
 ```
 
 #### Sample call
 
-```
+```swift
     var error = libre_init()
     guard error == 0
     else {
