@@ -66,7 +66,7 @@ func sip(inout agent: COpaquePointer)
     }
 
     // Initialize the SIP stack.
-    error = ua_init("CLL", 1, 1, 1, 0)
+    error = ua_init("SIP", 1, 1, 1, 0)
     if error != 0
     {
         return
