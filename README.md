@@ -101,13 +101,13 @@ func sip(inout agent: COpaquePointer)
 
 private func sipClose(agent: COpaquePointer)
 {
-    mem_deref(UnsafeMutablePointer(agent));
-    ua_close();
-    mod_close();
+    mem_deref(UnsafeMutablePointer(agent))
+    ua_close()
+    mod_close()
 
     // Close and check for memory leaks.
-    libre_close();
-    tmr_debug();
+    libre_close()
+    tmr_debug()
     mem_debug()
 }
 ```
