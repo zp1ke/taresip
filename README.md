@@ -9,13 +9,15 @@
 
 ## Installation
 
+### With CocoaPods
+
 Add the following line to your `Podfile` and run `pod install` command.
 
 ```
 pod 'taresip'
 ```
 
-## Build manually
+### Build manually
 
 1. Download project and run [build.sh](build.sh) script.
 2. Drag generated libraries and headers files into your XCode project.
