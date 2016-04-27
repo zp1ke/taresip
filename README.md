@@ -3,7 +3,7 @@
 ![Platform: iOS 7+](https://img.shields.io/badge/platform-iOS%207%2B-blue.svg?style=flat)
 [![Cocoapods compatible](https://img.shields.io/badge/Cocoapods-compatible-4BC51D.svg?style=flat)](https://cocoapods.org)
 [![License: BSD](https://img.shields.io/badge/license-BSD-lightgrey.svg?style=flat)](https://github.com/miche-atucha/taresip/blob/master/LICENSE)
-[![Release version](https://img.shields.io/badge/release-0.0.2-blue.svg)]()
+[![Release version](https://img.shields.io/badge/release-0.0.3-blue.svg)]()
 
 [Cocoapod](https://cocoapods.org/) for [baresip](http://www.creytiv.com/baresip.html).
 
