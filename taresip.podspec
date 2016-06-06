@@ -9,6 +9,9 @@ Pod::Spec.new do |s|
   s.license     = { :type => "BSD", :file => "LICENSE" }
   s.description = "Baresip is a portable and modular SIP User-Agent with audio and video support."
 
+  s.source_files        = 'build/baresip/include/**',
+                          'build/re/include/**',
+                          'build/rem/include/**'
   s.public_header_files = 'build/baresip/include/**',
                           'build/re/include/**',
                           'build/rem/include/**'
