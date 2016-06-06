@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name        = "taresip"
   s.version     = "0.1.0"
-  s.author      = { "Michel Atucha" => "miche.atucha@gmail.com]" }
+  s.author      = { "Michel Atucha" => "miche.atucha@gmail.com" }
   s.homepage    = "https://github.com/miche-atucha/taresip"
   s.summary     = "Cocoapod for baresip."
   s.source      = { :git => "https://github.com/miche-atucha/taresip.git", :tag => "#{s.version}" }
