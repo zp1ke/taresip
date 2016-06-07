@@ -13,7 +13,7 @@ extern "C" {
 
 
 /** Defines the Baresip version string */
-#define BARESIP_VERSION "0.4.18"
+#define BARESIP_VERSION "0.4.19"
 
 
 /* forward declarations */
@@ -737,7 +737,8 @@ struct aucodec {
 	struct le le;
 	const char *pt;
 	const char *name;
-	uint32_t srate;
+	uint32_t srate;             /* Audio samplerate */
+	uint32_t crate;             /* RTP Clock rate   */
 	uint8_t ch;
 	const char *fmtp;
 	auenc_update_h *encupdh;
@@ -1029,6 +1030,14 @@ static inline bool h264_is_keyframe(int type)
 
 
 int module_preload(const char *module);
+
+
+/*
+ * MOS (Mean Opinion Score)
+ */
+
+double mos_calculate(double *r_factor, double rtt,
+		     double jitter, uint32_t num_packets_lost);
 
 
 #ifdef __cplusplus

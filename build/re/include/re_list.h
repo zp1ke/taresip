@@ -24,7 +24,6 @@ struct list {
 };
 
 /** Linked list Initializer */
-#undef LIST_INIT
 #define LIST_INIT {NULL, NULL}
 
 
@@ -92,6 +91,6 @@ static inline bool list_isempty(const struct list *list)
 	return list ? list->head == NULL : true;
 }
 
-#undef LIST_FOREACH
+
 #define LIST_FOREACH(list, le)					\
 	for ((le) = list_head((list)); (le); (le) = (le)->next)
