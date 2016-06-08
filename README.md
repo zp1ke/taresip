@@ -112,4 +112,9 @@ private func sipClose(agent: COpaquePointer)
     tmr_debug()
     mem_debug()
 }
+
+private static func getCString(str: String) -> UnsafeMutablePointer<Int8>
+{
+    return UnsafeMutablePointer((str as NSString).UTF8String)
+}
 ```
