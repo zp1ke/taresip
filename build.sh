@@ -61,8 +61,8 @@ rm -rf ${BUILD_DIR}
 mkdir -p ${BUILD_DIR}
 
 DOWNLOAD_URL="http://www.creytiv.com/pub"
-library "re-0.4.16" "${DOWNLOAD_URL}/re-0.4.16.tar.gz" "re"
+library "re-0.4.17" "${DOWNLOAD_URL}/re-0.4.17.tar.gz" "re"
 library "rem-0.4.7" "${DOWNLOAD_URL}/rem-0.4.7.tar.gz" "rem"
-library "baresip-0.4.19" "${DOWNLOAD_URL}/baresip-0.4.19" "baresip"
+library "baresip-0.4.20" "${DOWNLOAD_URL}/baresip-0.4.20" "baresip"
 
 baresipIOS "re" "rem" "baresip"
