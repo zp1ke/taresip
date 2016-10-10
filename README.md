@@ -40,81 +40,68 @@ Import headers on your `-Bridging_Header.h`.
 #### Sample call flow
 
 ```swift
-var agent: COpaquePointer = COpaquePointer(nilLiteral: ())
-sip(&agent)
-sipClose(agent)
-
-func sip(inout agent: COpaquePointer)
 {
-    var error = libre_init()
-    if error != 0
-    {
-        return
+    var agent: OpaquePointer? = nil
+    var client: SipClient? = nil
+    do {
+        client = try SipClient(agent: &agent)
+    } catch {
+        print("error: \(error)")
     }
-
-    // Initialize dynamic modules.
-    mod_init()
-    
-    // Make configure file.
-    let mainBundle = NSBundle.mainBundle()
-    if let path = mainBundle.resourcePath
-    {
-        conf_path_set(getCString(path))
-    }
-    error = conf_configure()
-    if error != 0
-    {
-        return
-    }
-
-    // Initialize the SIP stack.
-    error = ua_init("SIP", 1, 1, 1, 0)
-    if error != 0
-    {
-        return
-    }
-    
-    // Load modules.
-    error = conf_modules()
-    if error != 0
-    {
-        return
-    }
-
-    let addr: String = "sip:user:password@server.com:port;transport=udp;answermode=auto"
-
-    // Start user agent.
-    error = ua_alloc(&agent, getCString(addr))
-    if error != 0
-    {
-        return
-    }
-
-    // Make an outgoing call.
-    error = ua_connect(agent, nil, nil, "sip:target@server.com:port", nil, VIDMODE_OFF);
-    if error != 0
-    {
-        return
-    }
-
-    // Start the main loop.
-    re_main(nil)
 }
 
-private func sipClose(agent: COpaquePointer)
-{
-    mem_deref(UnsafeMutablePointer(agent))
-    ua_close()
-    mod_close()
-
-    // Close and check for memory leaks.
-    libre_close()
-    tmr_debug()
-    mem_debug()
+enum SipError: Error {
+    case libre
+    case config
+    case stack
+    case modules
+    case userAgent
+    case call
 }
 
-private static func getCString(str: String) -> UnsafeMutablePointer<Int8>
-{
-    return UnsafeMutablePointer((str as NSString).UTF8String)
+final class SipClient {
+
+    required init?(agent: inout OpaquePointer?) throws {
+        guard libre_init() == 0 else { throw SipError.libre }
+
+        // Initialize dynamic modules.
+        mod_init()
+
+        // Make configure file.
+        if let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first {
+            conf_path_set(path)
+        }
+        guard conf_configure() == 0 else { throw SipError.config }
+
+        // Initialize the SIP stack.
+        guard ua_init("SIP", 1, 1, 1, 0) == 0 else { throw SipError.stack }
+
+        // Load modules.
+        guard conf_modules() == 0 else { throw SipError.modules }
+
+        let addr = "sip:user:password@server.com:port;transport=udp;answermode=auto"
+
+        // Start user agent.
+        guard ua_alloc(&agent, addr) == 0 else { throw SipError.userAgent }
+
+        // Make an outgoing call.
+        guard ua_connect(agent, nil, nil, "sip:target@server.com:port", nil, VIDMODE_OFF) == 0 else { throw SipError.call }
+
+        // Start the main loop.
+        re_main(nil)
+    }
+
+    func close(agent: OpaquePointer) {
+        mem_deref(UnsafeMutablePointer(agent))
+        ua_close()
+        mod_close()
+
+        // Close and check for memory leaks.
+        libre_close()
+        tmr_debug()
+        mem_debug()
+    }
+
 }
+
 ```
